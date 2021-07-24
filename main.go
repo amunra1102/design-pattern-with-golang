@@ -5,6 +5,7 @@ import (
 	"design-pattern/builder"
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
+	"design-pattern/iterator"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -12,6 +13,30 @@ import (
 )
 
 func main() {
+	// Iterator pattern
+	user1 := &iterator.User{
+		Name: "Test 1",
+		Age: 18,
+	}
+
+	user2 := &iterator.User{
+		Name: "Test 2",
+		Age: 28,
+	}
+
+	userCollection := &iterator.UserCollection{
+		Users: []*iterator.User{user1, user2},
+	}
+
+	iterator := userCollection.CreateIterator()
+
+	for iterator.HasNext() {
+		user := iterator.GetNext()
+		fmt.Printf("User is %+v\n", user)
+	}
+
+	fmt.Println("-------------------------------------")
+
 	// Command pattern
 	tv := &command.Tivi{}
 	onCommand := &command.OnCommand{
