@@ -4,6 +4,7 @@ import (
 	"design-pattern/abstractfactory"
 	"design-pattern/builder"
 	"design-pattern/chainofresponsibility"
+	"design-pattern/command"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -11,6 +12,26 @@ import (
 )
 
 func main() {
+	// Command pattern
+	tv := &command.Tivi{}
+	onCommand := &command.OnCommand{
+		Device: tv,
+	}
+
+	offCommand := &command.OffCommand{
+		Device: tv,
+	}
+
+	onButton := &command.Button{
+		Command: onCommand,
+	}
+
+	onButton.Press()
+
+	offButton := &command.Button{Command: offCommand}
+	offButton.Press()
+
+	fmt.Println("-------------------------------------")
 
 	// Chain of responsibility
 	cashier := &chainofresponsibility.Cashier{}
