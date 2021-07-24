@@ -8,6 +8,7 @@ import (
 	"design-pattern/iterator"
 	"design-pattern/mediator"
 	"design-pattern/memento"
+	"design-pattern/observer"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -15,6 +16,22 @@ import (
 )
 
 func main() {
+	// Observer pattern
+	shirtItem := observer.NewItem("Nike shirt")
+	observerFirst := &observer.Customer{ID: "first@gmail.com"}
+	observerSecond := &observer.Customer{ID: "second@gmail.com"}
+
+	shirtItem.Register(observerFirst)
+	shirtItem.Register(observerSecond)
+
+	shirtItem.UpdateAvailability()
+
+	shirtItem.DeRegister(observerSecond)
+
+	shirtItem.UpdateAvailability()
+
+	fmt.Println("-------------------------------------")
+
 	// Memento Pattern
 	careTaker := &memento.CareTaker{
 		MementoArray: make([]*memento.Memento, 0),
