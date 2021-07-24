@@ -3,6 +3,7 @@ package main
 import (
 	"design-pattern/abstractfactory"
 	"design-pattern/builder"
+	"design-pattern/chainofresponsibility"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -10,6 +11,23 @@ import (
 )
 
 func main() {
+
+	// Chain of responsibility
+	cashier := &chainofresponsibility.Cashier{}
+
+	medical := &chainofresponsibility.Medicine{}
+	medical.SetNext(cashier)
+
+	doctor := &chainofresponsibility.Doctor{}
+	doctor.SetNext(medical)
+
+	reception := &chainofresponsibility.Reception{}
+	reception.SetNext(doctor)
+
+	patient := &chainofresponsibility.Patient{Name: "Patient test"}
+	reception.Execute(patient)
+
+	fmt.Println("-------------------------------------")
 
 	// Prototype Pattern
 	file1 := &prototype.File{Name: "File 1"}
