@@ -7,6 +7,7 @@ import (
 	"design-pattern/command"
 	"design-pattern/iterator"
 	"design-pattern/mediator"
+	"design-pattern/memento"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -14,6 +15,34 @@ import (
 )
 
 func main() {
+	// Memento Pattern
+	careTaker := &memento.CareTaker{
+		MementoArray: make([]*memento.Memento, 0),
+	}
+
+	originator := &memento.Originator{}
+	originator.SetState("A")
+
+	fmt.Printf("Originnator current state: %s\n", originator.GetState())
+	careTaker.AddMemento(originator.CreateMemento())
+
+	originator.SetState("B")
+	fmt.Printf("Originnator current state: %s\n", originator.GetState())
+
+	careTaker.AddMemento(originator.CreateMemento())
+
+	originator.SetState("C")
+	fmt.Printf("Originnator current state: %s\n", originator.GetState())
+	careTaker.AddMemento(originator.CreateMemento())
+
+	originator.RestoreMemento(careTaker.GetMemento(1))
+	fmt.Printf("Originnator current state: %s\n", originator.GetState())
+
+	originator.RestoreMemento(careTaker.GetMemento(0))
+	fmt.Printf("Originnator current state: %s\n", originator.GetState())
+
+	fmt.Println("-------------------------------------")
+
 	// Mediator pattern
 	stationManager := mediator.NewStationManager()
 	passengerTrain := &mediator.PassengerTrain{
