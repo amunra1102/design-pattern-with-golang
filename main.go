@@ -3,12 +3,35 @@ package main
 import (
 	"design-pattern/abstractfactory"
 	"design-pattern/builder"
+	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
 	"time"
 )
 
 func main() {
+
+	// Prototype Pattern
+	file1 := &prototype.File{Name: "File 1"}
+	file2 := &prototype.File{Name: "File 2"}
+	file3 := &prototype.File{Name: "File 3"}
+
+	folder1 := &prototype.Folder{
+		Children: []prototype.INode{file1},
+		Name: "folder 1",
+	}
+	folder2 := &prototype.Folder{
+		Children: []prototype.INode{folder1, file2, file3},
+		Name: "folder 2",
+	}
+
+	fmt.Println("Printing for Folder 2")
+	folder2.Print("   ")
+	cloneFolder := folder2.Clone()
+	fmt.Println("Printing for clone Folder 2")
+	cloneFolder.Print("   ")
+
+	fmt.Println("-------------------------------------")
 
 	// Abstract Factory
 	adidasFactory := abstractfactory.GetSportFactory("adidas")
