@@ -11,11 +11,20 @@ import (
 	"design-pattern/observer"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
+	"design-pattern/state"
 	"fmt"
 	"time"
 )
 
 func main() {
+	// State pattern
+	machine := state.NewMachine()
+	machine.On()
+	machine.Off()
+	machine.Off()
+
+	fmt.Println("-------------------------------------")
+
 	// Observer pattern
 	shirtItem := observer.NewItem("Nike shirt")
 	observerFirst := &observer.Customer{ID: "first@gmail.com"}
