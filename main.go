@@ -6,6 +6,7 @@ import (
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
 	"design-pattern/iterator"
+	"design-pattern/mediator"
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"fmt"
@@ -13,6 +14,23 @@ import (
 )
 
 func main() {
+	// Mediator pattern
+	stationManager := mediator.NewStationManager()
+	passengerTrain := &mediator.PassengerTrain{
+		Mediator: stationManager,
+	}
+
+	goodsTrain := &mediator.GoodsTrain{
+		Mediator: stationManager,
+	}
+
+	passengerTrain.RequestArrival()
+	goodsTrain.RequestArrival()
+
+	passengerTrain.Departure()
+
+	fmt.Println("-------------------------------------")
+
 	// Iterator pattern
 	user1 := &iterator.User{
 		Name: "Test 1",
@@ -28,10 +46,10 @@ func main() {
 		Users: []*iterator.User{user1, user2},
 	}
 
-	iterator := userCollection.CreateIterator()
+	iter := userCollection.CreateIterator()
 
-	for iterator.HasNext() {
-		user := iterator.GetNext()
+	for iter.HasNext() {
+		user := iter.GetNext()
 		fmt.Printf("User is %+v\n", user)
 	}
 
