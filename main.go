@@ -3,6 +3,7 @@ package main
 import (
 	"design-pattern/abstractfactory"
 	"design-pattern/adapter"
+	"design-pattern/bridge"
 	"design-pattern/builder"
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
@@ -21,6 +22,26 @@ import (
 )
 
 func main() {
+	// Bridge pattern
+	hpPrinter := &bridge.HP{}
+	epsonPrinter := &bridge.Epson{}
+
+	macComputer := &bridge.Mac{}
+	macComputer.SetPrinter(hpPrinter)
+	macComputer.Print()
+
+	macComputer.SetPrinter(epsonPrinter)
+	macComputer.Print()
+
+	windowComputer := &bridge.Window{}
+	windowComputer.SetPrint(hpPrinter)
+	windowComputer.Print()
+
+	windowComputer.SetPrint(epsonPrinter)
+	windowComputer.Print()
+
+	fmt.Println("-------------------------------------")
+
 	// Adapter pattern
 	client := &adapter.Client{}
 
