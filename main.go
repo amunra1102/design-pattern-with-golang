@@ -14,11 +14,29 @@ import (
 	"design-pattern/state"
 	"design-pattern/strategy"
 	"design-pattern/templatemethod"
+	"design-pattern/visitor"
 	"fmt"
 	"time"
 )
 
 func main() {
+	// Visitor pattern
+	square := &visitor.Square{Side: 2}
+	circle := &visitor.Circle{Radius: 3}
+	rectangle := &visitor.Rectangle{A: 4, B: 5}
+
+	areaCal := &visitor.AreaCalculator{}
+	square.Accept(areaCal)
+	circle.Accept(areaCal)
+	rectangle.Accept(areaCal)
+
+	perimeterCal := &visitor.PerimeterCalculator{}
+	square.Accept(perimeterCal)
+	circle.Accept(perimeterCal)
+	rectangle.Accept(perimeterCal)
+
+	fmt.Println("-------------------------------------")
+
 	// Template method pattern
 	smsOTP := &templatemethod.SMS{}
 	o := &templatemethod.OTP{ObjectOTP: smsOTP}
