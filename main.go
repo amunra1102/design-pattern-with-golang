@@ -8,6 +8,7 @@ import (
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
 	"design-pattern/composite"
+	"design-pattern/decorator"
 	"design-pattern/facade"
 	"design-pattern/flyweight"
 	"design-pattern/iterator"
@@ -28,6 +29,25 @@ import (
 )
 
 func main() {
+	// Decorator pattern
+	tomatoPizza := &decorator.TomatoPizza{}
+	chickenPizza := &decorator.ChickenPizza{}
+
+	fmt.Println(tomatoPizza.DoPizza())
+	fmt.Println(chickenPizza.DoPizza())
+
+	pepperDecorator := decorator.NewPepperDecorator(chickenPizza)
+	fmt.Println(pepperDecorator.DoPizza())
+	pepperDecorator.SetPizza(tomatoPizza)
+	fmt.Println(pepperDecorator.DoPizza())
+
+	cheeseDecorator := decorator.NewCheeseDecorator(chickenPizza)
+	fmt.Println(cheeseDecorator.DoPizza())
+	cheeseDecorator.SetPizza(tomatoPizza)
+	fmt.Println(cheeseDecorator.DoPizza())
+
+	fmt.Println("-------------------------------------")
+
 	// Proxy pattern
 	nginxServer := proxy.NewNginxServer()
 
