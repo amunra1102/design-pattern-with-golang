@@ -8,6 +8,7 @@ import (
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
 	"design-pattern/composite"
+	"design-pattern/facade"
 	"design-pattern/iterator"
 	"design-pattern/mediator"
 	"design-pattern/memento"
@@ -19,10 +20,28 @@ import (
 	"design-pattern/templatemethod"
 	"design-pattern/visitor"
 	"fmt"
+	"log"
 	"time"
 )
 
 func main() {
+	// Facade pattern
+	walletFacade := facade.NewWalletFacade("abc", 1234)
+	err := walletFacade.AddMoneyToWallet("abc", 1234, 10)
+
+	fmt.Println()
+	if err != nil {
+		log.Fatalf("error: %s\n", err.Error())
+	}
+
+	fmt.Println()
+	err = walletFacade.DeductMoneyFromWallet("abc", 1234, 5)
+	if err != nil {
+		log.Fatalf("error: %s\n", err.Error())
+	}
+
+	fmt.Println("-------------------------------------")
+
 	// Composite pattern
 	file1Com := &composite.File{Name: "File1"}
 	file2Com := &composite.File{Name: "File2"}
