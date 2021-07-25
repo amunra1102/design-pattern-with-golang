@@ -12,11 +12,30 @@ import (
 	"design-pattern/prototype"
 	"design-pattern/singleton"
 	"design-pattern/state"
+	"design-pattern/strategy"
 	"fmt"
 	"time"
 )
 
 func main() {
+	// Strategy pattern
+	lfu := &strategy.LFU{}
+	cache := strategy.InitCache(lfu)
+	cache.Add("a", "1")
+	cache.Add("b", "2")
+	cache.Add("c", "3")
+	cache.Add("c2", "3")
+
+	lru := &strategy.LRU{}
+	cache.SetEvictionAlgo(lru)
+	cache.Add("d", "4")
+
+	fifo := &strategy.FIFO{}
+	cache.SetEvictionAlgo(fifo)
+	cache.Add("e", "5")
+
+	fmt.Println("-------------------------------------")
+
 	// State pattern
 	machine := state.NewMachine()
 	machine.On()
