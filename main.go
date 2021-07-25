@@ -9,6 +9,7 @@ import (
 	"design-pattern/command"
 	"design-pattern/composite"
 	"design-pattern/facade"
+	"design-pattern/flyweight"
 	"design-pattern/iterator"
 	"design-pattern/mediator"
 	"design-pattern/memento"
@@ -21,10 +22,30 @@ import (
 	"design-pattern/visitor"
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 )
 
 func main() {
+	// Fly weight pattern
+	factory := flyweight.NewFactory()
+
+	for i := 0; i < 15; i++ {
+		starContext := flyweight.NewContext(strconv.Itoa(i), 2)
+		soldier := factory.CreateSoldier("Foot Man")
+		soldier.Promote(starContext)
+	}
+
+	for i := 0; i < 30; i++ {
+		starContext := flyweight.NewContext(strconv.Itoa(i), 2)
+		soldier := factory.CreateSoldier("Sea Man")
+		soldier.Promote(starContext)
+	}
+
+	fmt.Printf("Number of storage soldier map: %d\n", factory.GetSize())
+
+	fmt.Println("-------------------------------------")
+
 	// Facade pattern
 	walletFacade := facade.NewWalletFacade("abc", 1234)
 	err := walletFacade.AddMoneyToWallet("abc", 1234, 10)
