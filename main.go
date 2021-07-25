@@ -2,6 +2,7 @@ package main
 
 import (
 	"design-pattern/abstractfactory"
+	"design-pattern/adapter"
 	"design-pattern/builder"
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
@@ -20,6 +21,17 @@ import (
 )
 
 func main() {
+	// Adapter pattern
+	client := &adapter.Client{}
+
+	window := &adapter.Window{}
+	client.InsertSquareUSBInComputer(window)
+
+	macAdapter := &adapter.MacAdapter{M: adapter.Mac{}}
+	client.InsertSquareUSBInComputer(macAdapter)
+
+	fmt.Println("-------------------------------------")
+
 	// Visitor pattern
 	square := &visitor.Square{Side: 2}
 	circle := &visitor.Circle{Radius: 3}
