@@ -15,6 +15,7 @@ import (
 	"design-pattern/memento"
 	"design-pattern/observer"
 	"design-pattern/prototype"
+	"design-pattern/proxy"
 	"design-pattern/singleton"
 	"design-pattern/state"
 	"design-pattern/strategy"
@@ -27,6 +28,32 @@ import (
 )
 
 func main() {
+	// Proxy pattern
+	nginxServer := proxy.NewNginxServer()
+
+	appStatusURL := "app/status"
+	createUserUrl := "create/user"
+
+	httpCode, message := nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n\n", appStatusURL, httpCode, message)
+
+	httpCode, message = nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n\n", appStatusURL, httpCode, message)
+
+	httpCode, message = nginxServer.HandleRequest(appStatusURL, "GET")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n\n", appStatusURL, httpCode, message)
+
+	httpCode, message = nginxServer.HandleRequest(createUserUrl, "POST")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n\n", createUserUrl, httpCode, message)
+
+	httpCode, message = nginxServer.HandleRequest(createUserUrl, "POST")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n\n", createUserUrl, httpCode, message)
+
+	httpCode, message = nginxServer.HandleRequest("createUserUrl", "GET")
+	fmt.Printf("URL: %s\nHttpCode: %d\nMessage: %s\n", createUserUrl, httpCode, message)
+
+	fmt.Println("-------------------------------------")
+
 	// Fly weight pattern
 	factory := flyweight.NewFactory()
 
