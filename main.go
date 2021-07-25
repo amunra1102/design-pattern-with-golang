@@ -13,11 +13,23 @@ import (
 	"design-pattern/singleton"
 	"design-pattern/state"
 	"design-pattern/strategy"
+	"design-pattern/templatemethod"
 	"fmt"
 	"time"
 )
 
 func main() {
+	// Template method pattern
+	smsOTP := &templatemethod.SMS{}
+	o := &templatemethod.OTP{ObjectOTP: smsOTP}
+	o.GenAndSendOTP(4)
+
+	emailOTP := &templatemethod.Email{}
+	o = &templatemethod.OTP{ObjectOTP: emailOTP}
+	o.GenAndSendOTP(4)
+
+	fmt.Println("-------------------------------------")
+
 	// Strategy pattern
 	lfu := &strategy.LFU{}
 	cache := strategy.InitCache(lfu)
