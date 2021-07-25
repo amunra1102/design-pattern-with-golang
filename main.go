@@ -7,6 +7,7 @@ import (
 	"design-pattern/builder"
 	"design-pattern/chainofresponsibility"
 	"design-pattern/command"
+	"design-pattern/composite"
 	"design-pattern/iterator"
 	"design-pattern/mediator"
 	"design-pattern/memento"
@@ -22,6 +23,23 @@ import (
 )
 
 func main() {
+	// Composite pattern
+	file1Com := &composite.File{Name: "File1"}
+	file2Com := &composite.File{Name: "File2"}
+	file3Com := &composite.File{Name: "File3"}
+
+	folder1Com := &composite.Folder{Name: "Folder 1"}
+	folder1Com.Add(file1Com)
+
+	folder2Com := &composite.Folder{Name: "Folder 2"}
+	folder2Com.Add(file2Com)
+	folder2Com.Add(file3Com)
+	folder2Com.Add(folder1Com)
+
+	folder2Com.Search("rose")
+
+	fmt.Println("-------------------------------------")
+
 	// Bridge pattern
 	hpPrinter := &bridge.HP{}
 	epsonPrinter := &bridge.Epson{}
